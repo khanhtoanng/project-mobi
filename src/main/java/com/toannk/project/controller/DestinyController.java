@@ -39,6 +39,11 @@ public class DestinyController {
 		return service.getAllDestiny();
 	}
 
+	@GetMapping(value = "/destiny/{id}")
+	public Destiny getAllDestiny(@PathVariable("id") int id) {
+		return service.getDestinyById(id);
+	}
+
 	@DeleteMapping(value = "/destiny/{id}")
 	public int deleteDestiny(@PathVariable("id") int id) {
 		return service.deleteDestiny(id);

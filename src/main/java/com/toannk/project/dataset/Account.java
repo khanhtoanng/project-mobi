@@ -20,8 +20,36 @@ public class Account {
 	private String createTime;
 	private String updateTime;
 	private String updateAccount;
+	private String gender;
+	private String fcmToken;
 	
 	
+	
+	
+	/**
+	 * @return the fcmToken
+	 */
+	public String getFcmToken() {
+		return fcmToken;
+	}
+	/**
+	 * @param fcmToken the fcmToken to set
+	 */
+	public void setFcmToken(String fcmToken) {
+		this.fcmToken = fcmToken;
+	}
+	/**
+	 * @return the gender
+	 */
+	public String getGender() {
+		return gender;
+	}
+	/**
+	 * @param gender the gender to set
+	 */
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 	/**
 	 * @return the createTime
 	 */

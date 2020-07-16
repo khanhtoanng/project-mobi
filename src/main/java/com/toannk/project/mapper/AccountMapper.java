@@ -37,6 +37,7 @@ public interface AccountMapper {
 			+ "isActive,"
 			+ "descriptionAccount,"
 			+ "image,"
+			+ "gender,"
 			+ "createTime"
 			+ ") "
 			+ "values "
@@ -50,6 +51,7 @@ public interface AccountMapper {
 			+ "0,"
 			+ "#{descriptionAccount},"
 			+ "#{image},"
+			+ "#{gender},"
 			+ "GETDATE()"
 			+ " )")
 	public int createActor(Account account);
@@ -68,6 +70,7 @@ public interface AccountMapper {
 			+ "descriptionAccount = #{descriptionAccount},"
 			+ "updateTime = GETDATE(),"
 			+ "image = #{image},"
+			+ "gender = #{gender},"
 			+ "updateAccount = #{updateAccount} "
 			+ "where "
 			+ "username = #{username}")
@@ -96,6 +99,13 @@ public interface AccountMapper {
 	public String isLogin(@Param("username") String username, @Param("password") String password);
 	
 	
+	@Select("Select *"
+			+ "from "
+			+ "tbl_account "
+			+ "where "
+			+ "username = #{username}")
+	public Account getActorByUsername(@Param("username") String username);
+	
 	@Select("Select " + 
 			"DES.name," + 
 			"DES.location," + 
@@ -113,7 +123,7 @@ public interface AccountMapper {
 			"ON " + 
 			"DES.id = ACT.idDestiny " + 
 			"Where " + 
-			"DES.endTime < GETDATE() "
+			"DES.isDone = 1 " 
 			+ "AND "
 			+ "ACT.username = #{username}")
 	public List<ActorDestiny> getHistoryDestiny(@Param("username") String username);
@@ -126,7 +136,7 @@ public interface AccountMapper {
 			"DES.detail," + 
 			"DES.endTime," + 
 			"DES.createTime," + 
-			"ACT.roleInDestinty," + 
+			"ACT.roleInDestiny," + 
 			"ACT.contentRole " + 
 			"from " + 
 			"tbl_destiny as DES " + 
@@ -135,10 +145,26 @@ public interface AccountMapper {
 			"ON " + 
 			"DES.id = ACT.idDestiny " + 
 			"Where " + 
-			"DES.createTime > GETDATE() "
+			"DES.isDone = 0 " 
 			+ "AND "
 			+ "ACT.username = #{username}")
 	public List<ActorDestiny> getIncomingDestiny(@Param("username") String username);
+	
+	@Update("Update "
+			+ "tbl_account "
+			+ "set "
+			+ "fcmToken = #{token} "
+			+ "where "
+			+ "username = #{username}")
+	public int insertToken(@Param("token") String token, @Param("username") String username);
+	
+	@Select("Select "
+			+ "fcmToken "
+			+ "from "
+			+ "tbl_account "
+			+ "where "
+			+ "username =#{username}")
+	public String getFcmToken(@Param("username") String username);
 	
 	
 }

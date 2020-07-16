@@ -15,6 +15,23 @@ public class ActorRoleInDestiny {
 	private String updateTime;
 	private String updateAccount;
 	private String contentRole;
+	private String fullname;
+	
+	
+	
+	
+	/**
+	 * @return the fullname
+	 */
+	public String getFullname() {
+		return fullname;
+	}
+	/**
+	 * @param fullname the fullname to set
+	 */
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
 	/**
 	 * @return the username
 	 */

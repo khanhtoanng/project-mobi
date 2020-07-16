@@ -15,8 +15,23 @@ public class ActorDestiny {
 	private String detail;
 	private String endTime;
 	private String createTime;
-	private String roleInDestinty;
+	private String roleInDestiny;
 	private String contentRole;
+	private String username;
+	
+	
+	/**
+	 * @return the username
+	 */
+	public String getUsername() {
+		return username;
+	}
+	/**
+	 * @param username the username to set
+	 */
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	/**
 	 * @return the name
 	 */
@@ -101,17 +116,18 @@ public class ActorDestiny {
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
+	
 	/**
-	 * @return the roleInDestinty
+	 * @return the roleInDestiny
 	 */
-	public String getRoleInDestinty() {
-		return roleInDestinty;
+	public String getRoleInDestiny() {
+		return roleInDestiny;
 	}
 	/**
-	 * @param roleInDestinty the roleInDestinty to set
+	 * @param roleInDestiny the roleInDestiny to set
 	 */
-	public void setRoleInDestinty(String roleInDestinty) {
-		this.roleInDestinty = roleInDestinty;
+	public void setRoleInDestiny(String roleInDestiny) {
+		this.roleInDestiny = roleInDestiny;
 	}
 	/**
 	 * @return the contentRole

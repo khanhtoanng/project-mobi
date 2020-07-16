@@ -17,8 +17,11 @@ public interface AccountService {
 	public int insertActor(Account account);
 	public int updateActor(Account account,String username);
 	public int deleteActor(String username);
+	public Account getActorByUsername(String username);
 	public String isLogin(String username, String password);
 	public int isExistAccount(String username);
 	public List<ActorDestiny> getHistoryDestiny(String username);
 	public List<ActorDestiny> getIncomingDestiny(String username);
+	public int insertToken(String token,String username); 
+	public String getFcmToken(String username);
 }

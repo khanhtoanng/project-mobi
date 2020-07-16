@@ -32,7 +32,10 @@ public interface DestinyMapper {
 			+ "name,"
 			+ "location,"
 			+ "description,"
+			+ "numberOfScreen,"
+			+ "detail,"
 			+ "createTime,"
+			+ "isDone,"
 			+ "endTime"
 			+ " )"
 			+ "values "
@@ -40,10 +43,14 @@ public interface DestinyMapper {
 			+ "#{name},"
 			+ "#{location},"
 			+ "#{description},"
+			+ "#{numberOfScreen},"
+			+ "#{detail},"
 			+ "#{createTime},"
+			+ "#{isDone},"
 			+ "#{endTime}"
 			+ " )")
 	public int createDestiny(Destiny destiny);
+	
 	
 	@Select("Select * from tbl_destiny")
 	public List<Destiny> getAllDestiny();
@@ -55,6 +62,9 @@ public interface DestinyMapper {
 			+ "location = #{location},"
 			+ "description = #{description}, "
 			+ "createTime = #{createTime}, "
+			+ "detail = #{detail}, "
+			+ "numberOfScreen = #{numberOfScreen}, "
+			+ "isDone = #{isDone}, "
 			+ "endTime = #{endTime} "
 			+ "where "
 			+ "id = #{id}")
@@ -131,5 +141,23 @@ public interface DestinyMapper {
 	public int getQuantityEquipmentById(int id);
 	
 	
+	@Select("select "
+			+ "DES.name,"
+			+ "DES.description,"
+			+ "DES.createTime"
+			+ ",DES.endTime,"
+			+ "DES.numberOfScreen,"
+			+ "DES.location "+
+			"from tbl_destiny as DES " + 
+			"where "
+			+ "DES.id = #{id}" 
+			)
+	public Destiny getDestinyById(int id);
+	
+	@Select("Select * from tbl_actor_detail where idDestiny = #{id}")
+	public List<ActorRoleInDestiny> getListActorInDestiny(@Param("id") int id);
+	
+	@Select("Select * from tbl_destiny_detail where idDestiny = #{id}")
+	public List<EquipmentInDestiny> getListEquipmentInDestiny(@Param("id") int id);
 	
 }

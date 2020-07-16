@@ -21,7 +21,14 @@ import com.toannk.project.dataset.Equipment;
 @Mapper
 public interface EquipmentMapper {
 	
-	@Insert("Insert into tbl_equipment "
+	@Insert("Insert into tbl_equipment ("
+			+ "name,"
+			+ "description,"
+			+ "quantity,"
+			+ "image,"
+			+ "createTime,"
+			+ "status"
+			+ ")  "
 			+ "values "
 			+ "( "
 			+ "#{name},"
@@ -64,6 +71,8 @@ public interface EquipmentMapper {
 			+ "#{toDate}")
 	public void getEquipmentByTime(@Param("fromDate")  String fromDate,@Param("toDate")String toDate,@Param("status") String status);
 	
-
+	@Select("Select * from tbl_equipment where id = #{id}")
+	public Equipment getEquipmentById(@Param("id") int id);
+	
 	
 }

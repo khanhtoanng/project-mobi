@@ -19,9 +19,9 @@ public class ImageServiceImp implements ImageService{
 	}
 	
 	@Override
-	public List<Image> getAllImage() {
+	public List<Image> getAllImage(String type) {
 		
-		return mapper.getAllImage();
+		return mapper.getAllImage(type);
 	}
 
 	@Override

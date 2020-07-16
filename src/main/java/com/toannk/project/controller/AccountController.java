@@ -40,6 +40,21 @@ public class AccountController {
 	public List<Account> getAllAccount() {
 		return service.getAllActor();
 	}
+	
+	@GetMapping(value = "/actor/{username}")
+	public Account getActorByUsername(@PathVariable("username") String username) {
+		return service.getActorByUsername(username);
+	}
+	
+	@GetMapping(value = "/actor/fcm/get/{username}")
+	public String getFcmToken(@PathVariable("username") String username) {
+		return service.getFcmToken(username);
+	}
+	
+	@GetMapping(value = "/actor/fcm/{username}")
+	public int insertToken(@PathVariable("username") String username,@RequestParam(name = "token") String token) {
+		return service.insertToken(token, username);
+	}
 
 	@DeleteMapping(value = "/actor/{username}")
 	public int deleteAccount(@PathVariable("username") String username) {

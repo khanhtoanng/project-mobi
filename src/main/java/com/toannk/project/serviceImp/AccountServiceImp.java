@@ -103,4 +103,21 @@ public class AccountServiceImp implements AccountService {
 		return list;
 	}
 
+	@Override
+	public Account getActorByUsername(String username) {
+		
+		return mapper.getActorByUsername(username);
+	}
+
+	@Override
+	public int insertToken(String token, String username) {
+		
+		return mapper.insertToken(token, username);
+	}
+
+	@Override
+	public String getFcmToken(String username) {
+		return mapper.getFcmToken(username);
+	}
+
 }

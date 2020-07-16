@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,9 +30,9 @@ public class ImageController {
 		this.service = service;
 	}
 
-	@GetMapping(value = "/image")
-	public List<Image> getAllAccount() {
-		return service.getAllImage();
+	@GetMapping(value = "/image/{type}")
+	public List<Image> getAllAccount(@PathVariable("type") String type) {
+		return service.getAllImage(type);
 	}
 
 	@PostMapping(value = "/image")

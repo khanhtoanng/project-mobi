@@ -9,12 +9,15 @@ import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.toannk.project.dataset.Account;
 import com.toannk.project.dataset.ActorDestiny;
 import com.toannk.project.dataset.ActorRoleInDestiny;
 import com.toannk.project.dataset.Destiny;
 import com.toannk.project.dataset.Equipment;
 import com.toannk.project.dataset.EquipmentInDestiny;
+import com.toannk.project.mapper.AccountMapper;
 import com.toannk.project.mapper.DestinyMapper;
+import com.toannk.project.mapper.EquipmentMapper;
 import com.toannk.project.service.DestinyService;
 import com.toannk.project.utils.ConstranstUtils;
 
@@ -37,8 +40,16 @@ public class DestinyServiceImp implements DestinyService {
 	@Autowired
 	private DestinyMapper mapper;
 
-	public DestinyServiceImp(DestinyMapper mapper) {
+	@Autowired
+	private AccountMapper accMapper;
+
+	@Autowired
+	private EquipmentMapper equipMapper;
+
+	public DestinyServiceImp(DestinyMapper mapper, AccountMapper accMapper, EquipmentMapper equipMapper) {
 		this.mapper = mapper;
+		this.accMapper = accMapper;
+		this.equipMapper = equipMapper;
 	}
 
 	@Override
@@ -101,17 +112,16 @@ public class DestinyServiceImp implements DestinyService {
 		int result = QUANTITY_INPUT_ERROR;
 		try {
 			// check if quantity input is greatter than quantity in store
-			boolean isInValidInput = listEquipmentInDestiny
-					.stream()
+			boolean isInValidInput = listEquipmentInDestiny.stream()
 					.anyMatch(e -> e.getEquipmentQuantity() > mapper.getQuantityEquipmentById(e.getIdEquipment()));
-			
+
 			if (isInValidInput) {
 				return result;
-			} 
+			}
 
 			// insert list to DB
 			result = mapper.insertQuantityEquipmentInDestiny(listEquipmentInDestiny);
-			
+
 			// update quantity in store
 			listEquipmentInDestiny.stream().forEach(e -> {
 				int quantityAfter = mapper.getQuantityEquipmentById(e.getIdEquipment()) - e.getEquipmentQuantity();
@@ -137,6 +147,29 @@ public class DestinyServiceImp implements DestinyService {
 		}
 		return result;
 
+	}
+
+	@Override
+	public Destiny getDestinyById(int id) {
+		Destiny destiny = mapper.getDestinyById(id);
+		List<EquipmentInDestiny> listEquip = mapper.getListEquipmentInDestiny(id);
+		List<ActorRoleInDestiny> listActor = mapper.getListActorInDestiny(id);
+		if (!listEquip.isEmpty()) {
+			listEquip.stream().forEach(e -> {
+				Equipment equipment = equipMapper.getEquipmentById(e.getIdEquipment());
+				e.setName(equipment.getName());
+			});
+		}
+		if (!listActor.isEmpty()) {
+			listActor.stream().forEach(e -> {
+				Account account = accMapper.getActorByUsername(e.getUsername());
+				e.setFullname(account.getFullname());
+			});
+		}
+		destiny.setListActor(listActor);
+		destiny.setListEquipment(listEquip);
+
+		return destiny;
 	}
 
 }

@@ -19,12 +19,16 @@ import com.toannk.project.dataset.Image;
 public interface ImageMapper {
 	@Select("Select *"
 			+ "from "
-			+ "tbl_image")
-	public List<Image>getAllImage();
+			+ "tbl_image "
+			+ "where "
+			+ "type = #{type}")
+	public List<Image>getAllImage(String type);
 	
 	@Insert("Insert into "
 			+ "tbl_image "
 			+ "values "
-			+ "( #{image} )")
+			+ "( #{image},"
+			+ "#{type}"
+			+ " )")
 	public int addImage(Image image);
 }

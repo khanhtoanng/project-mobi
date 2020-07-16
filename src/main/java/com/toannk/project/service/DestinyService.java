@@ -16,6 +16,7 @@ import com.toannk.project.dataset.EquipmentInDestiny;
  */
 public interface DestinyService {
 	public List<Destiny> getAllDestiny();
+	public Destiny getDestinyById(int id);
 	public int insertDestiny(Destiny destiny);
 	public int updateDestiny(Destiny destiny,int id);
 	public int deleteDestiny(int id);

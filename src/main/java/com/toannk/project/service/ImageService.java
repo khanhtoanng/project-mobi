@@ -12,6 +12,6 @@ import com.toannk.project.dataset.Image;
  *
  */
 public interface ImageService {
-	public List<Image> getAllImage();
+	public List<Image> getAllImage(String type);
 	public int addImage(Image image);
 }

@@ -14,7 +14,35 @@ public class Equipment {
 	private int quantity;
 	private String image;
 	private String status;
+	private String createTime;
+	private String updateTime;
+	
+	
 
+	/**
+	 * @return the createTime
+	 */
+	public String getCreateTime() {
+		return createTime;
+	}
+	/**
+	 * @param createTime the createTime to set
+	 */
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+	/**
+	 * @return the updateTime
+	 */
+	public String getUpdateTime() {
+		return updateTime;
+	}
+	/**
+	 * @param updateTime the updateTime to set
+	 */
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
+	}
 	/**
 	 * @return the id
 	 */
